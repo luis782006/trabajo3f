@@ -5,6 +5,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const botonAbout = document.getElementById('boton-about');
         const modal = document.getElementById('modal');
         const closebtn = document.querySelector('.close-btn');
+        const heroBanner = document.querySelector('.hero-banner');
+
+        const url = "https://api.escuelajs.co/api/v1/products"
+
+        async function getProducts(){
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data; // Added return statement
+            } catch (error) {
+                console.log(error);
+                return []; // Added return for error case
+            }
+        }
+
+        //Selecionamos 5 productos y de ellos extraemos 5 imagenes
+        getProducts().then(async (data) => {
+            const productos = data.slice(0, 5);
+            productos.forEach((producto) => {
+                const imagen = producto.images[0];
+                const imagenElement = document.createElement('img');
+                imagenElement.src = imagen;
+                console.log(imagen)
+                imagenElement.alt = producto.title;
+                heroBanner.appendChild(imagenElement);
+            });
+        }).catch((error) => {
+            console.log('Error:', error);
+        });
 
         //Agregamos una clase o la quita seguen el estado en que este menuItems
         hamburger.addEventListener('click', (event) => {
