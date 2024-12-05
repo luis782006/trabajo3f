@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('modal');
         const closebtn = document.querySelector('.close-btn');
         const heroBanners = document.querySelectorAll('.hero-banner');
+        const productos = document.querySelector('.productos');
 
         const url = "https://api.escuelajs.co/api/v1/products"
 
@@ -60,12 +61,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Intervalos para llamar la funcion
-        setInterval(showNextImage, 3000); // 3 segundos
+        setInterval(showNextImage, 2000); // 3 segundos
     });
 }
-              
+         
         //cargamos imagenes
         cargarImagenes(imagenes);
+
+        //cargamos productos
+        async function cargarProductos(){
+            const productos = await getProducts();
+            productos.forEach(producto => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${producto.images[0]}" alt="${producto.title}">
+                    <h3>${producto.title}</h3>
+                    <p>${producto.price}</p>
+                `;
+                productos.appendChild(card);
+            });
+        }
+        cargarProductos();
       
 
         //Agregamos una clase o la quita seguen el estado en que este menuItems
