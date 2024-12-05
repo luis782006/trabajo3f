@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const botonAbout = document.getElementById('boton-about');
         const modal = document.getElementById('modal');
         const closebtn = document.querySelector('.close-btn');
-        const heroBanner = document.querySelector('.hero-banner');
+        const heroBanners = document.querySelectorAll('.hero-banner');
 
         const url = "https://api.escuelajs.co/api/v1/products"
 
@@ -19,21 +19,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 return []; // Added return for error case
             }
         }
+        //carga de imagenes para el banner
+        const imagenes=[
+            'asset/imagen1.png',
+            'asset/imagen3.png',
+            'asset/imagen2.png',
+            'asset/imagen4.png',            
+        ]
 
-        //Selecionamos 5 productos y de ellos extraemos 5 imagenes
-        getProducts().then(async (data) => {
-            const productos = data.slice(0, 5);
-            productos.forEach((producto) => {
-                const imagen = producto.images[0];
+        //funcion para cargar imagenes
+        function cargarImagenes(imagenes) {
+            heroBanners.forEach((heroBanner,bannerIndex) => {
+            // Crear contenedor de imágenes
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'carrusel-images';
+
+            // Crear imagen y pasarsela al contenedor creado
+            imagenes.forEach((imagen, index) => {
                 const imagenElement = document.createElement('img');
                 imagenElement.src = imagen;
-                console.log(imagen)
-                imagenElement.alt = producto.title;
-                heroBanner.appendChild(imagenElement);
+                imagenElement.alt = 'Imagen';
+                imagenElement.className = 'hero-image';
+                
+                // agrego la clase active a la primera imagen  primer banner
+                if (index === (bannerIndex * 2)) {
+                    imagenElement.classList.add('active');
+                }
+                imageContainer.appendChild(imagenElement);
             });
-        }).catch((error) => {
-            console.log('Error:', error);
-        });
+
+        heroBanner.appendChild(imageContainer);
+
+        let currentIndex = bannerIndex * 2;
+
+        function showNextImage() {
+            const images = imageContainer.querySelectorAll('.hero-image');
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        // Intervalos para llamar la funcion
+        setInterval(showNextImage, 3000); // 3 segundos
+    });
+}
+              
+        //cargamos imagenes
+        cargarImagenes(imagenes);
+      
 
         //Agregamos una clase o la quita seguen el estado en que este menuItems
         hamburger.addEventListener('click', (event) => {
