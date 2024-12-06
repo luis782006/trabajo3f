@@ -39,6 +39,8 @@
             seleccionados para cubrir todas tus necesidades y preferencias.</p>
         <span class="boton"><button id="boton-about">Conocenos</button></span>        
     </section>
+    
+    <!-- Inyecto los elementos (cards)-->
     <section class="productos-container" id="productos">  
         <h2>Productos</h2>     
         <div class="productos">
@@ -62,6 +64,7 @@
     </div>
 
     <!-- Estructura del modal Card -->
+     <!-- Modificos los elementos -->
     <div id="modal-card" class="modal-oculto">
         <div class="modal-content-card">
             <span class="close-btn-card">&times;</span>
@@ -77,10 +80,85 @@
         </div>
     </div>
 
-    <section></section>
-    <section>
-        <form action=""></form>
+    
+    <section id="form" class="promo-section">
+        <div class="promo-container">
+            <div class="promo-content">
+                <h2>¡SUSCRÍBETE A NUESTRAS PROMOCIONES!</h2>
+                <p class="promo-text">Recibe ofertas exclusivas, descuentos especiales y sé el primero en enterarte de nuestras novedades.</p>
+                <div class="promo-benefits">
+                    <div class="benefit">
+                        <i class="fas fa-percentage"></i>
+                        <h3>Descuentos Exclusivos</h3>
+                        <p>Accede a ofertas especiales solo para suscriptores</p>
+                    </div>
+                    <div class="benefit">
+                        <i class="fas fa-bell"></i>
+                        <h3>Notificaciones</h3>
+                        <p>Sé el primero en enterarte de nuevos productos</p>
+                    </div>
+                    <div class="benefit">
+                        <i class="fas fa-gift"></i>
+                        <h3>Regalos Sorpresa</h3>
+                        <p>Recibe regalos especiales en fechas señaladas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <footer></footer>
+
+    <section class="form-section">
+        <div class="form-container">
+            <form id="formularioRegistro" class="formulario">
+                <h2>Registro</h2>
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" class="input" placeholder="Tu nombre">
+                    <p id="errorNombre" class="mensaje-error"></p>
+                </div>
+                <div class="campo">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" id="correo" class="input" placeholder="tucorreo@ejemplo.com">
+                    <p id="errorCorreo" class="mensaje-error"></p>
+                </div>
+                <div class="campo">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" class="input" placeholder="Mínimo 8 caracteres">
+                    <p id="errorContrasena" class="mensaje-error"></p>
+                </div>
+                <div class="contenedor-boton">
+                    <button type="submit" class="boton-form">Suscribirse</button>
+                </div>
+            </form>
+            <p id="exitoFormulario" class="mensaje-exito"></p>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-column">
+            <h3>Sobre nosotros</h3>
+            <p>Encuentra las últimas tendencias en ropa de calidad. Perfecto para cualquier ocasión.</p>
+            <p>Dirección: Calle Falsa 123, Ciudad.</p>
+            <p>Horario: Lun-Vie 9:00 - 18:00</p>
+          </div>
+          <div class="footer-column">
+            <h3>Suscríbete</h3>
+            <p>Recibe ofertas exclusivas y las últimas novedades directamente en tu correo.</p>
+            <p>Asegurate de no perder ninguna oferta.</p>
+            <p>Todos medios de pago, en cuotas de 3, 6, 12 y 18.</p>
+          </div>
+          <div class="footer-column">
+            <h3>Contáctanos</h3>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>Email: 3f@tienda.com</p>
+            <p>Teléfono: +123 456 789</p>
+          </div>
+        </div>
+      </footer>
+      
 </body>
 </html>
