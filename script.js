@@ -6,9 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('modal');
         const closebtn = document.querySelector('.close-btn');
         const heroBanners = document.querySelectorAll('.hero-banner');
-        const productos = document.querySelector('.productos');
+        const productosContainer = document.querySelector('.productos');
+        
+        const modalCard = document.getElementById('modal-card');
+        const closebtnCard = document.querySelector('.close-btn-card');
 
-        const url = "https://api.escuelajs.co/api/v1/products"
+        const modalCardNombreProducto = document.querySelector('.modal-content-card h3');
+        const modalCardPrecioProducto = document.querySelector('.modal-content-card p');
+        const modalCardImagenProducto = document.querySelector('.modal-content-card img');
+        const botonComprarProducto = document.querySelector('.boton-comprar-producto');
+    
+        
+        const url = "https://fakestoreapi.com/products"
 
         async function getProducts(){
             try {
@@ -71,20 +80,49 @@ document.addEventListener('DOMContentLoaded', () => {
         //cargamos productos
         async function cargarProductos(){
             const productos = await getProducts();
-            productos.forEach(producto => {
+            //debugger;   
+            //filtro de productos para quedarme solo con ropa de hombre y mujer             
+            const productosRopa = productos.filter(producto => 
+                producto.category === "men's clothing" || 
+                producto.category === "women's clothing"
+            );
+            productosRopa.forEach(producto => {
                 const card = document.createElement('div');
                 card.className = 'card';
+                const imagenUrl = producto.image;
                 card.innerHTML = `
-                    <img src="${producto.images[0]}" alt="${producto.title}">
-                    <h3>${producto.title}</h3>
-                    <p>${producto.price}</p>
+                <img src="${imagenUrl}" alt="${producto.title}">
+                <h3>${producto.title}</h3>
+                <p>$${producto.price}</p>                                
                 `;
-                productos.appendChild(card);
-            });
-        }
-        cargarProductos();
-      
+                //Creo un boton para agregarlo a la card
+                const boton = document.createElement('button');
+                boton.className = 'boton-comprar';
+                boton.textContent = 'Ver Detalle';
 
+                
+                boton.addEventListener('click', () => {                    
+                    modalCardNombreProducto.textContent =producto.title;
+                    modalCardPrecioProducto.textContent = `$${producto.price}`;
+                    modalCardImagenProducto.src = imagenUrl;
+                    modalCardImagenProducto.alt = producto.title;
+                    botonComprarProducto.addEventListener('click', () => {                        
+                        alert(`Producto ${producto.title} agregado al carrito`);                                              
+                    });
+                    modalCard.classList.remove('modal-oculto');
+                    modalCard.classList.add('modal-visible');
+                   
+                });
+
+                card.appendChild(boton);
+
+                productosContainer.appendChild(card); 
+            });
+            }
+        cargarProductos();      
+
+
+        
         //Agregamos una clase o la quita seguen el estado en que este menuItems
         hamburger.addEventListener('click', (event) => {
             event.preventDefault();
@@ -117,5 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
         closebtn.addEventListener('click', () => {
             modal.classList.remove('modal-visible');
             modal.classList.add('modal-oculto');
+        });
+
+        closebtnCard.addEventListener('click', () => {
+            modalCard.classList.remove('modal-visible');
+            modalCard.classList.add('modal-oculto');
         });
 });

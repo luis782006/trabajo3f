@@ -18,7 +18,7 @@
         </button>
         <ul class="menu-items">
             <li>Inicio</li>
-            <li>Productos</li>
+            <li><a href="#productos">Productos</a></li>
             <li>Contacto</li>
         </ul>
     </nav>
@@ -39,24 +39,44 @@
             seleccionados para cubrir todas tus necesidades y preferencias.</p>
         <span class="boton"><button id="boton-about">Conocenos</button></span>        
     </section>
-    <section class="productos">
-
+    <section class="productos-container" id="productos">  
+        <h2>Productos</h2>     
+        <div class="productos">
+            <!-- Aquí se hacen las tarjetas de productos por JS-->
+        </div>
     </section>
 
 
 
-    <!-- Estructura del modal -->
+    <!-- Estructura del modal about -->
     <div id="modal" class="modal-oculto">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h2>Acerca de 3F</h2>  
             <div class="about-modal">
                 <img src="asset/logo.png" alt="">
-                <p>En 3F, nos dedicamos a ofrecer productos de la más alta calidad, diseñados para satisfacer las necesidades de nuestros clientes. Con años de experiencia en el mercado, nuestra misión es brindar soluciones innovadoras, confiables y accesibles, siempre priorizando la excelencia y el compromiso con cada uno de nuestros usuarios. Creemos en la transparencia, el respeto y la mejora continua, valores que nos han convertido en un referente en el sector. ¡Descubre cómo 
+                <p>En 3F, nos dedicamos a ofrecer productos de la más alta calidad, diseño para satisfacer las necesidades de nuestros clientes. Con años de experiencia en el mercado, nuestra misión es brindar soluciones innovadoras, confiables y accesibles, siempre priorizando la excelencia y el compromiso con cada uno de nuestros usuarios. Creemos en la transparencia, el respeto y la mejora continua, valores que nos han convertido en un referente en el sector. ¡Descubre cómo 
                     nuestros productos pueden hacer la diferencia en tu día a día!</p>
             </div>          
         </div>
     </div>
+
+    <!-- Estructura del modal Card -->
+    <div id="modal-card" class="modal-oculto">
+        <div class="modal-content-card">
+            <span class="close-btn-card">&times;</span>
+            <h2>Producto</h2>  
+           <div class="modal-card-producto">
+               <img>
+               <div class="producto-info">
+                   <h3>Titulo</h3>              
+                   <p>Precio</p>
+                </div>
+                <button class="boton-comprar-producto">Comprar</button>
+           </div>
+        </div>
+    </div>
+
     <section></section>
     <section>
         <form action=""></form>
