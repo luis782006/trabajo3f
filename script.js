@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalCardPrecioProducto = document.querySelector('.modal-content-card p');
         const modalCardImagenProducto = document.querySelector('.modal-content-card img');
         const botonComprarProducto = document.querySelector('.boton-comprar-producto');
+
+        const inputs=document.querySelectorAll('#nombre, #correo, #contrasena');
+        const botonform = document.querySelector('.boton-form');
+       
     
         
         const url = "https://fakestoreapi.com/products"
@@ -161,4 +165,59 @@ document.addEventListener('DOMContentLoaded', () => {
             modalCard.classList.remove('modal-visible');
             modalCard.classList.add('modal-oculto');
         });
+
+        inputs.forEach(input => {
+            input.addEventListener('mouseenter', () => {
+                input.style.border = "1px solid var(--color-resaltado)";
+                input.style.backgroundColor = "var(--color-secundario)";                
+                input.style.color = "var(--color-texto)";
+            });
+
+            input.addEventListener('mouseleave', () => {              
+                input.style.border = "2px solid transparent";
+                input.style.backgroundColor = "var(--color-texto)";
+                input.style.color = "var(--color-secundario)";               
+            });
+
+            input.addEventListener('focus', () => {  
+                input.style.border = "1px solid var(--color-resaltado)";
+                input.style.backgroundColor = "var(--color-secundario)";
+                input.style.color = "var(--color-texto)";
+            });
+
+            input.addEventListener('blur', () => { 
+                input.style.border = "2px solid transparent";
+                input.style.backgroundColor = "var(--color-texto)";
+                input.style.color = "var(--color-secundario)";
+            });
+        });
+      
+        botonform.addEventListener('click', (event) => {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const contrasena = document.getElementById('contrasena').value;
+
+            //validar nombre
+            if (nombre.trim() === '') {
+                document.getElementById('errorNombre').textContent = 'El nombre es obligatorio';               
+            } else{
+                document.getElementById('errorNombre').textContent = '';                
+            }
+
+            //validar correo
+            if (correo.trim() === '' || !correo.includes('@')) {
+                document.getElementById('errorCorreo').textContent = 'El correo es obligatorio';                
+            }else{
+                document.getElementById('errorCorreo').textContent = '';                
+            }
+
+            //validar contrasena
+            if (contrasena.trim() === '' || contrasena.length < 8) {
+                document.getElementById('errorContrasena').textContent = 'La contrasena debe tener al menos 8 caracteres';                
+            }else{
+                document.getElementById('errorContrasena').textContent = '';                
+            }
+        });
+
 });

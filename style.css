@@ -494,7 +494,7 @@
 
 .benefit {
   padding: 2rem;
-  background-color: var(--color-primario);
+  background-color: var(--color-resaltado);
   border-radius: 10px;
   transition: transform 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -564,16 +564,11 @@
   width: 100%;
   padding: 1rem;  
   border-radius: 5px;
+  border: 2px solid transparent;
   background-color: var(--color-texto);
-  color: var(--color-texto);
+  color: var(--color-primario);
   font-size: 1rem;
   transition: all 0.3s ease;
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--color-resaltado);
-  box-shadow: 0 0 0 2px rgba(0, 170, 255, 0.2);
 }
 
 .mensaje-error {
@@ -581,6 +576,7 @@
   font-size: 0.9rem;
   margin-top: 0.5rem;
   min-height: 1.2em;
+  font-family: roboto;
 }
 
 .mensaje-exito {
@@ -608,7 +604,6 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 170, 255, 0.3);
 }
-
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .promo-container {
@@ -781,4 +776,3 @@ html {
         font-size: 1.2rem;
     }
   }
-```
