@@ -22,7 +22,7 @@
             <li><a href="#registro">Promociones</a></li>
         </ul>
     </nav>
-    <header class="hero" id="inicio">
+    <header class="hero scroll-margin" id="inicio">
         <div class="hero-banner"></div>
         <div class="hero-text">
             <h2>¡Bienvenido a 3F!</h2>
@@ -41,7 +41,7 @@
     </section>
     
     <!-- Inyecto los elementos (cards)-->
-    <section class="productos-container" id="productos">  
+    <section class="productos-container scroll-margin" id="productos">  
         <h2>Productos</h2>     
         <div class="productos">
             <!-- Aquí se hacen las tarjetas de productos por JS-->
@@ -72,7 +72,9 @@
            <div class="modal-card-producto">
                <img>
                <div class="producto-info">
-                   <h3>Titulo</h3>              
+                   <h3>Titulo</h3>   
+                   <h3 id="talle"></h3>           
+                   <h3 id="color"></h3>
                    <p>Precio</p>
                 </div>
                 <button class="boton-comprar-producto">Comprar</button>
@@ -107,7 +109,7 @@
         </div>
     </section>
 
-    <section class="form-section" id="registro">
+    <section class="form-section scroll-margin" id="registro">
         <div class="form-container">
             <form id="formularioRegistro" class="formulario">
                 <h2>Registro</h2>

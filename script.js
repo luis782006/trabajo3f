@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const mensajeExito = document.querySelector('.mensaje-exito');
         const nombreSocio = document.getElementById('nombre-socio');
         const correoSocio = document.getElementById('correo-socio');
-    
+        const talle=document.getElementById('talle');
+        const color=document.getElementById('color');
         
         const url = "https://fakestoreapi.com/products"
 
@@ -79,14 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Intervalos para llamar la funcion
         setInterval(showNextImage, 2000); // 3 segundos
     });
-}
-         
+}         
         //cargamos imagenes
         cargarImagenes(imagenes);
 
         //cargamos productos
         async function cargarProductos(){
             const productos = await getProducts();
+            productos.forEach(producto => {
+                producto.talle = ["S", "M", "L", "XL"];
+                producto.color = ["Negro", "Blanco", "Rojo", "Azul"];
+            });
+            
+            
             //debugger;   
             //filtro de productos para quedarme solo con ropa de hombre y mujer             
             const productosRopa = productos.filter(producto => 
@@ -99,10 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 const imagenUrl = producto.image;
+                //Concateno los elementos del array de la propiedad talle y color
+                const talleString = producto.talle.join(', ');
+                const colorString = producto.color.join(', ');
+
                 card.innerHTML = `
                 <img src="${imagenUrl}" alt="${producto.title}">
-                <h3>${producto.title}</h3>
-                <p>$${producto.price}</p>                                
+                <h3>${producto.title}</h3>                
+                <p>Precio: $${producto.price}</p>                                
                 `;
                 //Creo un boton para agregarlo a la card
                 const boton = document.createElement('button');
@@ -111,9 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 boton.addEventListener('click', () => {                    
                     modalCardNombreProducto.textContent = producto.title;
-                    modalCardPrecioProducto.textContent = `$${producto.price}`;
+                    modalCardPrecioProducto.textContent = `Precio: $${producto.price}`;
                     modalCardImagenProducto.src = imagenUrl;
-                    modalCardImagenProducto.alt = producto.title;                    
+                    modalCardImagenProducto.alt = producto.title; 
+                    talle.textContent =`Talles: ${talleString}`;
+                    color.textContent = `Color:  ${colorString}`;
                     modalCard.classList.remove('modal-oculto');
                     modalCard.classList.add('modal-visible');
                 });
@@ -257,6 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 //me limpio el mensaje
                 setTimeout(()=>{
                     mensajeExito.textContent = '';
+                    nombreSocio.textContent = 'Usuario';
+                    correoSocio.textContent = 'Correo Electronico';
 
                 },2000); 
                 
