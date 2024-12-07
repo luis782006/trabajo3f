@@ -17,12 +17,12 @@
             <i class="fas fa-bars"></i>
         </button>
         <ul class="menu-items">
-            <li>Inicio</li>
+            <li><a href="#inicio">Inicio</a></li>
             <li><a href="#productos">Productos</a></li>
-            <li>Contacto</li>
+            <li><a href="#registro">Promociones</a></li>
         </ul>
     </nav>
-    <header class="hero">
+    <header class="hero" id="inicio">
         <div class="hero-banner"></div>
         <div class="hero-text">
             <h2>¡Bienvenido a 3F!</h2>
@@ -107,7 +107,7 @@
         </div>
     </section>
 
-    <section class="form-section">
+    <section class="form-section" id="registro">
         <div class="form-container">
             <form id="formularioRegistro" class="formulario">
                 <h2>Registro</h2>
@@ -128,11 +128,37 @@
                 </div>
                 <div class="contenedor-boton">
                     <button type="submit" class="boton-form">Suscribirse</button>
+                    <div class="spinner-form">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
                 </div>
             </form>
             <p id="exitoFormulario" class="mensaje-exito"></p>
         </div>
+        <!--Tarjeta de Socio de promociones-->
+        <div class="contenedor-tarjeta"> 
+            <h2>Tarjeta de Socio</h2>
+            <div class="tarjeta-socio">
+                <div class="tarjeta-header">
+                    <div class="tarjeta-info">
+                        <h3 id="nombre-socio">Usuario</h3>
+                        <p class="cargo">Socio Premium</p>
+                    </div>
+                    <div class="tarjeta-logo">
+                        <img src="asset/logo.png" alt="Logo 3F">
+                    </div>
+                </div>
+                <div class="tarjeta-contacto">                    
+                    <p><i class="fas fa-envelope"></i><span id="correo-socio">Correo Electronico</span></p>
+                    <br>
+                    <p style="color:var(--color-primario); font-weight: bold;">Contáctanos</p>
+                    <p><i class="fas fa-phone"></i> +123 456 789</p>
+                    <p><i class="fas fa-location-dot"></i> Sucursal San Martin</p>
+                </div>
+            </div>
+        </div>
     </section>
+
     <footer>
         <div class="footer-container">
           <div class="footer-column">

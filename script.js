@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const inputs=document.querySelectorAll('#nombre, #correo, #contrasena');
         const botonform = document.querySelector('.boton-form');
-       
+        const spinnerForm = document.querySelector('.fa-spin');
+        const mensajeExito = document.querySelector('.mensaje-exito');
+        const nombreSocio = document.getElementById('nombre-socio');
+        const correoSocio = document.getElementById('correo-socio');
     
         
         const url = "https://fakestoreapi.com/products"
@@ -90,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 producto.category === "men's clothing" || 
                 producto.category === "women's clothing"
             );
+
+            
             productosRopa.forEach(producto => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -104,25 +109,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 boton.className = 'boton-comprar';
                 boton.textContent = 'Ver Detalle';
 
-                
                 boton.addEventListener('click', () => {                    
-                    modalCardNombreProducto.textContent =producto.title;
+                    modalCardNombreProducto.textContent = producto.title;
                     modalCardPrecioProducto.textContent = `$${producto.price}`;
                     modalCardImagenProducto.src = imagenUrl;
-                    modalCardImagenProducto.alt = producto.title;
-                    botonComprarProducto.addEventListener('click', () => {                        
-                        alert(`Producto ${producto.title} agregado al carrito`);                                              
-                    });
+                    modalCardImagenProducto.alt = producto.title;                    
                     modalCard.classList.remove('modal-oculto');
                     modalCard.classList.add('modal-visible');
-                   
                 });
 
                 card.appendChild(boton);
-
                 productosContainer.appendChild(card); 
             });
-            }
+            // Agregar el event listener una sola vez fuera del forEach
+            botonComprarProducto.addEventListener('click', () => {   
+                alert('Producto agregado al carrito'); 
+                modalCard.classList.remove('modal-visible');
+                modalCard.classList.add('modal-oculto');                                                                    
+            });
+        }
         cargarProductos();      
 
 
@@ -143,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
        
+
         // Manejar el cambio de tamaño de la ventana
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
@@ -172,6 +178,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.style.backgroundColor = "var(--color-secundario)";                
                 input.style.color = "var(--color-texto)";
             });
+            if(input.id === 'nombre'){
+                input.addEventListener('input', (e) => {
+                    nombreSocio.textContent = e.target.value;
+                });
+            }
+            if(input.id === 'correo'){
+                input.addEventListener('input', (e) => {
+                    correoSocio.textContent = e.target.value;
+                });
+            }
 
             input.addEventListener('mouseleave', () => {              
                 input.style.border = "2px solid transparent";
@@ -197,26 +213,53 @@ document.addEventListener('DOMContentLoaded', () => {
             const nombre = document.getElementById('nombre').value;
             const correo = document.getElementById('correo').value;
             const contrasena = document.getElementById('contrasena').value;
+            let formularioValidado = true; // Cambiamos a true por defecto
 
             //validar nombre
             if (nombre.trim() === '') {
-                document.getElementById('errorNombre').textContent = 'El nombre es obligatorio';               
-            } else{
+                document.getElementById('errorNombre').textContent = 'El nombre es obligatorio';   
+                formularioValidado = false;            
+            } else {
                 document.getElementById('errorNombre').textContent = '';                
             }
 
             //validar correo
             if (correo.trim() === '' || !correo.includes('@')) {
-                document.getElementById('errorCorreo').textContent = 'El correo es obligatorio';                
-            }else{
+                document.getElementById('errorCorreo').textContent = 'El correo es obligatorio'; 
+                formularioValidado = false;               
+            } else {
                 document.getElementById('errorCorreo').textContent = '';                
             }
 
             //validar contrasena
             if (contrasena.trim() === '' || contrasena.length < 8) {
                 document.getElementById('errorContrasena').textContent = 'La contrasena debe tener al menos 8 caracteres';                
-            }else{
+                formularioValidado = false;
+            } else {
                 document.getElementById('errorContrasena').textContent = '';                
+            }
+
+            if (formularioValidado) {
+                // Ocultar botón y mostrar spinner
+                botonform.style.display = 'none';
+                spinnerForm.classList.add('showSpinner');
+                //muestro el mensaje de exito y espero 2 segundos
+                setTimeout(() => {                    
+                    mensajeExito.textContent = 'Registro exitoso';
+                }, 1000);
+                // trabajo sobre el spinner y form
+                setTimeout(() => {                
+                    spinnerForm.classList.remove('showSpinner');
+                    botonform.style.display = 'block';
+                    
+                    document.getElementById('formularioRegistro').reset();
+                }, 2000);
+                //me limpio el mensaje
+                setTimeout(()=>{
+                    mensajeExito.textContent = '';
+
+                },2000); 
+                
             }
         });
 

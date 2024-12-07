@@ -28,6 +28,10 @@
     height: 5.6rem;
     font-family: Roboto;
     box-shadow: var(--color-cuaternario) 20px 1px 50px;
+    position: fixed;
+    top: 0;
+    width: 100%;  
+    z-index: 1;
   }
   .menu img{
     cursor: pointer;
@@ -66,6 +70,11 @@
   .menu li:hover a {
     color: var(--color-primario);
   }
+  .scroll-margin {
+    scroll-margin-top: 20rem; /* Un poco más que la altura del menú para dar espacio */
+}
+
+
  body .hero {
     width: 60%;
     margin: 0 auto;
@@ -75,8 +84,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 16rem;
-    margin-top: 20px !important;
+    height: 26rem;
+    margin-top: 40px !important;
     margin-bottom: 20px !important;    
     background-color: var(--color-secundario);
     color: var(--color-texto);
@@ -100,27 +109,21 @@
     justify-content: center;
     align-items: center;
   }
-  .hero image{
-    width: 10% !important;
-    height: 10%;
-  }
+
   .hero h2{
-    font-size: 3rem;
+    font-size: 4rem;
   }
   .hero h3{
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
   .carrusel-images{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    height: 50px;
-    width:50px;
+    align-items: center;      
   }
   .hero-image{
-    width: 100px;
+    width: 200px;
     display: none;   
   }
   .active{
@@ -289,18 +292,18 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;   
-    gap: 20px;
+    gap: 40px;
     padding: 20px;
-    
-}
-
-.card {
+  }
+  
+  .card {
     border: 1px solid var(--color-resaltado);
     border-radius: 8px;
     padding: 15px;
     text-align: center;
     transition: transform 0.2s;
     background-color: var(--color-secundario);
+    box-shadow: var(--color-cuaternario) 10px 1px 10px;
     color: var(--color-texto);
     font-family: Roboto;
     font-size: 1.4rem;
@@ -526,11 +529,17 @@
 /* Form Section */
 .form-section {
   background-color: var(--color-terciario);  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0;
+  margin: 2rem 0;
 }
 
 .form-container {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 25%;
+  max-width: 600px;  
   padding: 0 2rem;
 }
 
@@ -583,6 +592,8 @@
   color: #00ff88;
   text-align: center;
   margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-family: 'roboto';
   font-size: 1rem;
 }
 
@@ -604,6 +615,105 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 170, 255, 0.3);
 }
+
+.spinner-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.spinner-form i {
+    display: none;
+    font-size: 2rem;
+    color: var(--color-texto);
+}
+
+.spinner-form i.showSpinner {
+    display: block;
+}
+.contenedor-tarjeta{
+  width: 25%;
+  padding: 0 2rem;
+}
+.contenedor-tarjeta h2{
+  color: var(--color-texto);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.tarjeta-socio {
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 2rem;
+    
+}
+
+.tarjeta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px;
+    background-color: var(--color-secundario);    
+    border-radius: 10px;
+    padding: 1.6rem;
+}
+
+.tarjeta-info h3 {
+    color: var(--color-texto);
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.tarjeta-info .cargo {
+    color: var(--color-texto);
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.tarjeta-logo img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.tarjeta-contacto {
+    color: var(--color-secundario);
+}
+
+.tarjeta-contacto p {
+    margin: 0.7rem 0;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--color-secundario);
+}
+
+.tarjeta-contacto p i {
+    color: var(--color-secundario);
+    width: 20px;
+    margin-right: 2rem;
+}
+
+.tarjeta-contacto p span {
+    margin-left: 0;
+}
+
+/* Responsive para la sección de formulario y tarjeta */
+@media screen and (max-width: 768px) {
+    .form-section {
+        flex-direction: column;
+    }
+
+    .form-container,
+    .contenedor-tarjeta {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .promo-container {
@@ -654,6 +764,10 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Scroll Offset para secciones */
+.scroll-margin {
+    scroll-margin-top: 6rem; /* Un poco más que la altura del menú para dar espacio */
+}
 
   /* Estilos Responsive */
   @media screen and (max-width: 768px) {
