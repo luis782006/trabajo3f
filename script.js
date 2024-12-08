@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const toastContainer = document.querySelector('.toast-container');   
         const categorias = document.getElementById('categorias');
         const precios = document.getElementById('precios');
+        const nroSocio = document.getElementById('nro-socio'); 
 
         
         const url = "https://fakestoreapi.com/products"
@@ -213,15 +214,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if(input.id === 'correo'){
                 input.addEventListener('input', (e) => {
                     correoSocio.textContent = e.target.value;
+                    // número de socio al azarde 5 dígitos (entre 10000 y 99999)
+                    let numeroDeSocio = 10000 + Math.floor(Math.random() * 90000);
+                    nroSocio.textContent = `3F${numeroDeSocio}`;    
                 });
             }
-
+            
             input.addEventListener('mouseleave', () => {              
                 input.style.border = "2px solid transparent";
                 input.style.backgroundColor = "var(--color-texto)";
                 input.style.color = "var(--color-secundario)";               
             });
-
+            
             input.addEventListener('focus', () => {  
                 input.style.border = "1px solid var(--color-resaltado)";
                 input.style.backgroundColor = "var(--color-secundario)";
@@ -234,14 +238,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.style.color = "var(--color-secundario)";
             });
         });
-      
+        
         botonform.addEventListener('click', (event) => {
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const correo = document.getElementById('correo').value;
             const contrasena = document.getElementById('contrasena').value;
             let formularioValidado = true; // Cambiamos a true por defecto
-
+            
             //validar nombre
             if (nombre.trim() === '') {
                 document.getElementById('errorNombre').textContent = 'El nombre es obligatorio';   
@@ -249,15 +253,16 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 document.getElementById('errorNombre').textContent = '';                
             }
-
+            
             //validar correo
             if (correo.trim() === '' || !correo.includes('@')) {
                 document.getElementById('errorCorreo').textContent = 'El correo es obligatorio'; 
-                formularioValidado = false;               
+                formularioValidado = false;  
             } else {
                 document.getElementById('errorCorreo').textContent = '';                
+                            
             }
-
+            
             //validar contrasena
             if (contrasena.trim() === '' || contrasena.length < 8) {
                 document.getElementById('errorContrasena').textContent = 'La contrasena debe tener al menos 8 caracteres';                
@@ -265,14 +270,16 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 document.getElementById('errorContrasena').textContent = '';                
             }
-
+            
             if (formularioValidado) {
                 // Ocultar botón y mostrar spinner
                 botonform.style.display = 'none';
                 spinnerForm.classList.add('showSpinner');
+               
                 //muestro el mensaje de exito y espero 2 segundos
                 setTimeout(() => {                    
                     mensajeExito.textContent = 'Registro exitoso';
+                    
                 }, 1000);
                 // trabajo sobre el spinner y form
                 setTimeout(() => {                
@@ -286,31 +293,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     mensajeExito.textContent = '';
                     nombreSocio.textContent = 'Usuario';
                     correoSocio.textContent = 'Correo Electronico';
+                    nroSocio.textContent = 'Nro de Socio';
                 },2000);                 
             }
         });
 
-        categorias.addEventListener('change', async () => {
+        //con los valores de los select filtro. La funcion se ejecuta cada vez que se cambia el select
+        async function aplicarFiltros() {
             let categoriaSeleccionada = categorias.value;
+            let precioSeleccionado = precios.value;
             
             if (categoriaSeleccionada === 'ropaM') {
                 categoriaSeleccionada = "women's clothing";
-            }else if(categoriaSeleccionada === 'ropaH'){
+            } else if(categoriaSeleccionada === 'ropaH') {
                 categoriaSeleccionada = "men's clothing";
-            }else{
-                categoriaSeleccionada = "todos";
             }
-                         
-            const productos = await modificarProductos();   
-            if(categoriaSeleccionada!=='todos'){
-                const productosFiltrados = productos.filter(producto => producto.category === categoriaSeleccionada);            
-                productosContainer.innerHTML = '';
-                await mostrarProductos(productosFiltrados);   
-            }else{
-                productosContainer.innerHTML = '';
-                await mostrarProductos(productos); 
-            }       
-                       
-        });
 
+            let productos = await modificarProductos();
+            
+            if(categoriaSeleccionada !== 'todos') {
+                productos = productos.filter(producto => producto.category === categoriaSeleccionada);
+            }
+
+            if (precioSeleccionado === 'menor') {
+                productos.sort((a, b) => a.price - b.price);
+            } else if (precioSeleccionado === 'mayor') {
+                productos.sort((a, b) => b.price - a.price);
+            }
+
+            productosContainer.innerHTML = '';
+            await mostrarProductos(productos);
+        }
+
+
+        categorias.addEventListener('change', aplicarFiltros);
+        precios.addEventListener('change', aplicarFiltros);
 });

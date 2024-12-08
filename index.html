@@ -20,6 +20,7 @@
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#productos">Productos</a></li>
             <li><a href="#registro">Promociones</a></li>
+            <li id="carrito-total"><a href="#carrito"><i class="fas fa-shopping-cart"></i>2</a></li>
         </ul>
     </nav>
     <header class="hero scroll-margin" id="inicio">
@@ -177,11 +178,34 @@
                 </div>
                 <div class="tarjeta-contacto">                    
                     <p><i class="fas fa-envelope"></i><span id="correo-socio">Correo Electronico</span></p>
+                    <p><i class="fas fa-id-card"></i><span id="nro-socio">Nro de Socio</span></p>
                     <br>
                     <p style="color:var(--color-primario); font-weight: bold;">Contáctanos</p>
                     <p><i class="fas fa-phone"></i> +123 456 789</p>
                     <p><i class="fas fa-location-dot"></i> Sucursal San Martin</p>
                 </div>
+            </div>
+            <div class="letra-chica">
+                <p>Esta tarjeta es personal e intransferible. Su uso está sujeto a la inscripción exitosa
+                     en nuestra sesión de promociones. La tarjeta debe presentarse en las condiciones originales 
+                     para ser válida. Nos reservamos el derecho de modificar o cancelar la promoción en cualquier momento sin previo aviso. Al recibir esta tarjeta,
+                     aceptas nuestros términos y políticas disponibles en nuestro sitio web.</p>            
+            </div>
+        </div>
+    </section>
+    <section id="carrito" class="carrito scroll-margin">
+        <div class="carrito-container">
+            <h2>Carrito de Compras</h2>
+            <div class="carrito-items">
+                <div class="carrito-item">
+                    <img src="asset/imagen1.png" alt="Ropa 1">
+                    <h3>Titulo Producto</h3>
+                    <p>Precio:</p>
+                    <button class="boton-eliminar">Eliminar</button>
+                </div>               
+            </div>
+            <div class="carrito-total">
+                <p>Total: $90.00</p>
             </div>
         </div>
     </section>
