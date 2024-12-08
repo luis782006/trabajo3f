@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const correoSocio = document.getElementById('correo-socio');
         const talle=document.getElementById('talle');
         const color=document.getElementById('color');
+        const toastContainer = document.querySelector('.toast-container');
+        const toastMessage = document.getElementById('toast-message');
         
         const url = "https://fakestoreapi.com/products"
 
@@ -135,14 +137,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             // Agregar el event listener una sola vez fuera del forEach
             botonComprarProducto.addEventListener('click', () => {   
-                alert('Producto agregado al carrito'); 
-                modalCard.classList.remove('modal-visible');
-                modalCard.classList.add('modal-oculto');                                                                    
+               // remover la clase en toast
+               modalCard.classList.remove('modal-visible');
+               modalCard.classList.add('modal-oculto');  
+               //muestro e toast                                                                  
+               toastContainer.classList.add('show'); 
+               // Espero  2 segundos y remuevo la clase para que no se vea                  
+               setTimeout(() => {
+                   toastContainer.classList.remove('show');
+               }, 2000);
             });
         }
         cargarProductos();      
-
-
         
         //Agregamos una clase o la quita seguen el estado en que este menuItems
         hamburger.addEventListener('click', (event) => {

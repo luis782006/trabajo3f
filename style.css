@@ -772,6 +772,47 @@ html {
     scroll-margin-top: 100px; /* Un poco más que la altura del menú para dar espacio */
 }
 
+.toast-container{
+  position: fixed;
+  background-color: var(--color-texto);
+  top: 10rem;
+  right: 20px;
+  z-index: 9999;
+  width: 20%;
+  height:4rem;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(58, 189, 230, 0.966);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.3s ease, transform 0.3s ease
+}
+.toast-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast{
+  display: flex;
+  padding:10px;
+  align-items: center;
+  justify-content: center;
+}
+.toast-message{
+  margin-top: 10px;
+  color: var(--color-primario);
+  font-size: 1.2rem;
+  font-family: roboto;
+  font-weight: bold;
+}
+.toast i{
+  margin-top: 10px;
+  margin-right: 10px;
+  color: var(--color-primario);
+  font-size: 1.2rem;
+}
   /* Estilos Responsive */
   @media screen and (max-width: 768px) {
     .hamburger {
