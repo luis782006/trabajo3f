@@ -71,7 +71,7 @@
     color: var(--color-primario);
   }
   .scroll-margin {
-    scroll-margin-top: 20rem; /* Un poco más que la altura del menú para dar espacio */
+    scroll-margin-top: 30rem; /* Un poco más que la altura del menú para dar espacio */
 }
 
 
@@ -295,7 +295,13 @@
     gap: 40px;
     padding: 20px;
   }
-  
+  .productos-titulo{
+    color:var(--color-texto);
+    margin-top: 4rem;
+    font-family: roboto;
+    font-size: 1.4rem;
+    text-align: center;
+  }
   .card {
     border: 1px solid var(--color-resaltado);
     border-radius: 8px;
@@ -718,49 +724,6 @@
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 768px) {
-  .promo-container {
-    padding: 1rem;
-  }
-
-  .promo-content h2 {
-    font-size: 2rem;
-  }
-
-  .benefit {
-    padding: 1.5rem;
-  }
-
-  .formulario {
-    padding: 2rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .promo-content h2 {
-    font-size: 1.8rem;
-  }
-
-  .promo-text {
-    font-size: 1rem;
-  }
-
-  .benefit i {
-    font-size: 2rem;
-  }
-
-  .benefit h3 {
-    font-size: 1.2rem;
-  }
-
-  .formulario {
-    padding: 1.5rem;
-  }
-
-  .formulario h2 {
-    font-size: 1.6rem;
-  }
-}
 
   /* Agregar scroll suave para toda la página */
 html {
@@ -813,50 +776,33 @@ html {
   color: var(--color-primario);
   font-size: 1.2rem;
 }
-  /* Estilos Responsive */
-  @media screen and (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
 
-    .menu-items {
-        display: none;
-        position: absolute;
-        top: 5.6rem;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        background-color: var(--color-primario);
-        padding: 1rem;
-        align-items: center;
-    }
-
-    .menu-items.active {
-        display: flex;
-    }
-
-    .menu h1 {
-        margin-left: 1rem;
-    }
-
-    .menu li {
-        width: 80%;
-        text-align: center;
-    }
-
-    .hero div {
-        width: 90%;
-        padding: 2rem;
-    }
-
-    .hero h2 {
-        font-size: 2.2rem;
-    }
-
-    .hero h3 {
-        font-size: 1.4rem;
-    }
-  }
+.filtros-container{
+  margin:auto 0;
+ padding: 20px;
+ width: 100%;
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ gap: 2rem; 
+}
+.filtros-container label{
+  color: var(--color-texto);
+  font-size: 1.2rem;
+  font-family: roboto;
+}
+.filtros-container select{  
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 2px solid var(--color-primario);
+  background-color: var(--color-texto);
+  color: var(--color-primario);
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(58, 189, 230, 0.966);
+  margin-top: 10px;
+}
  
 
   footer {
@@ -919,6 +865,50 @@ html {
 .social-links a:hover {
   color: var(--color-resaltado);
 }
+ /* Estilos Responsive */
+ @media screen and (max-width: 768px) {
+  .hamburger {
+      display: block;
+  }
+
+  .menu-items {
+      display: none;
+      position: absolute;
+      top: 5.6rem;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      background-color: var(--color-primario);
+      padding: 1rem;
+      align-items: center;
+  }
+
+  .menu-items.active {
+      display: flex;
+  }
+
+  .menu h1 {
+      margin-left: 1rem;
+  }
+
+  .menu li {
+      width: 80%;
+      text-align: center;
+  }
+
+  .hero div {
+      width: 90%;
+      padding: 2rem;
+  }
+
+  .hero h2 {
+      font-size: 2.2rem;
+  }
+
+  .hero h3 {
+      font-size: 1.4rem;
+  }
+}
   /* Para pantallas muy pequeñas */
   @media screen and (max-width: 480px) {
     .hero div {
@@ -934,3 +924,47 @@ html {
         font-size: 1.2rem;
     }
   }
+  @media screen and (max-width: 768px) {
+    .promo-container {
+      padding: 1rem;
+    }
+  
+    .promo-content h2 {
+      font-size: 2rem;
+    }
+  
+    .benefit {
+      padding: 1.5rem;
+    }
+  
+    .formulario {
+      padding: 2rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .promo-content h2 {
+      font-size: 1.8rem;
+    }
+  
+    .promo-text {
+      font-size: 1rem;
+    }
+  
+    .benefit i {
+      font-size: 2rem;
+    }
+  
+    .benefit h3 {
+      font-size: 1.2rem;
+    }
+  
+    .formulario {
+      padding: 1.5rem;
+    }
+  
+    .formulario h2 {
+      font-size: 1.6rem;
+    }
+  }
+  

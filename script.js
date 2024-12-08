@@ -24,8 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const correoSocio = document.getElementById('correo-socio');
         const talle=document.getElementById('talle');
         const color=document.getElementById('color');
-        const toastContainer = document.querySelector('.toast-container');
-        const toastMessage = document.getElementById('toast-message');
+        const toastContainer = document.querySelector('.toast-container');   
+        const categorias = document.getElementById('categorias');
+        const precios = document.getElementById('precios');
+
         
         const url = "https://fakestoreapi.com/products"
 
@@ -86,23 +88,23 @@ document.addEventListener('DOMContentLoaded', () => {
         //cargamos imagenes
         cargarImagenes(imagenes);
 
-        //cargamos productos
-        async function cargarProductos(){
+        //funcion para modificar los productos originales de la api y agregarle las propiedades talle y color
+        // y devolver un nuevo array de obejto
+        async function modificarProductos(){
             const productos = await getProducts();
-            productos.forEach(producto => {
-                producto.talle = ["S", "M", "L", "XL"];
-                producto.color = ["Negro", "Blanco", "Rojo", "Azul"];
-            });
-            
-            
-            //debugger;   
-            //filtro de productos para quedarme solo con ropa de hombre y mujer             
-            const productosRopa = productos.filter(producto => 
+            //debugger;
+            const productosRopa =productos.filter(producto => 
                 producto.category === "men's clothing" || 
                 producto.category === "women's clothing"
             );
+            productosRopa.forEach(producto => {
+                producto.talle = ["S", "M", "L", "XL"];
+                producto.color = ["Negro", "Blanco", "Rojo", "Azul"];
+            });
+            return productosRopa;
+        }
 
-            
+        async function mostrarProductos(productosRopa){
             productosRopa.forEach(producto => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -148,6 +150,13 @@ document.addEventListener('DOMContentLoaded', () => {
                }, 2000);
             });
         }
+
+        //cargamos productos
+        async function cargarProductos(){
+            const productosRopa = await modificarProductos();
+            await mostrarProductos(productosRopa);                                    
+        }
+        //cargamos productos ya convertidos a cards
         cargarProductos();      
         
         //Agregamos una clase o la quita seguen el estado en que este menuItems
@@ -277,10 +286,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     mensajeExito.textContent = '';
                     nombreSocio.textContent = 'Usuario';
                     correoSocio.textContent = 'Correo Electronico';
-
-                },2000); 
-                
+                },2000);                 
             }
+        });
+
+        categorias.addEventListener('change', async () => {
+            let categoriaSeleccionada = categorias.value;
+            
+            if (categoriaSeleccionada === 'ropaM') {
+                categoriaSeleccionada = "women's clothing";
+            }else if(categoriaSeleccionada === 'ropaH'){
+                categoriaSeleccionada = "men's clothing";
+            }else{
+                categoriaSeleccionada = "todos";
+            }
+                         
+            const productos = await modificarProductos();   
+            if(categoriaSeleccionada!=='todos'){
+                const productosFiltrados = productos.filter(producto => producto.category === categoriaSeleccionada);            
+                productosContainer.innerHTML = '';
+                await mostrarProductos(productosFiltrados);   
+            }else{
+                productosContainer.innerHTML = '';
+                await mostrarProductos(productos); 
+            }       
+                       
         });
 
 });

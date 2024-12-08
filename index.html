@@ -41,8 +41,25 @@
     </section>
     
     <!-- Inyecto los elementos (cards)-->
-    <section class="productos-container scroll-margin" id="productos">  
+    <div class="productos-titulo scroll-margin">
         <h2>Productos</h2>     
+    </div>
+    
+    <div class="filtros-container">
+        <label>Categorias</label>
+        <select id="categorias">
+            <option value="todos">Todos</option>
+            <option value="ropaM">Ropa de Mujer</option>
+            <option value="ropaH">Ropa de Hombre</option>
+        </select>
+        <label>Precios</label>
+        <select id="precios">
+            <option value="todos">Todos</option>
+            <option value="menor">Menor a Mayor</option>
+            <option value="mayor">Mayor a Menor</option>
+        </select>
+    </div>
+    <section class="productos-container scroll-margin" id="productos">  
         <div class="productos">
             <!-- Aquí se hacen las tarjetas de productos por JS-->
         </div>
