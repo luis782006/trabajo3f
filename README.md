@@ -1,9 +1,10 @@
 # Aplicación Web de E-commerce
-
+![logo](https://github.com/user-attachments/assets/8497ce39-82f7-4bf8-b587-0214cf14dd1a)
 ## Descripción  
 Un sitio web de e-commerce moderno construido con HTML, CSS y JavaScript que permite a los usuarios explorar productos, agregarlos a un carrito de compras y gestionar sus compras.
 
 ## Funcionalidades  
+
 - Catálogo de productos dinámico utilizando la API de FakeStore.  
 - Funcionalidad de carrito de compras con almacenamiento local.  
 - Filtrado de productos por categorías y precios.  
