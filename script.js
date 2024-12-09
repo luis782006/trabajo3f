@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const categorias = document.getElementById('categorias');
         const precios = document.getElementById('precios');
         const nroSocio = document.getElementById('nro-socio'); 
-        const carritoStorage=localStorage.getItem('carrito') ? JSON.parse(localStorage.getItem('carrito')) : [];
-        const carritoItemImagen = document.querySelector('.carrito-item img');
+        const carritoStorage=[];
+        
 
         const url = "https://fakestoreapi.com/products"
 
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         };
                         carritoStorage.push(productoActual);
                         localStorage.setItem('carrito', JSON.stringify(carritoStorage));                    
-                        
+                        debugger;
                         const carritoItem = document.createElement('div');
                         carritoItem.className = 'carrito-item';
                         carritoItem.innerHTML = `
