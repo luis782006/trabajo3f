@@ -28,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const categorias = document.getElementById('categorias');
         const precios = document.getElementById('precios');
         const nroSocio = document.getElementById('nro-socio'); 
+        const carritoStorage=localStorage.getItem('carrito') ? JSON.parse(localStorage.getItem('carrito')) : [];
+        const carritoItemImagen = document.querySelector('.carrito-item img');
 
-        
         const url = "https://fakestoreapi.com/products"
 
         async function getProducts(){
@@ -113,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 //Concateno los elementos del array de la propiedad talle y color
                 const talleString = producto.talle.join(', ');
                 const colorString = producto.color.join(', ');
-
                 card.innerHTML = `
                 <img src="${imagenUrl}" alt="${producto.title}">
                 <h3>${producto.title}</h3>                
@@ -133,22 +133,50 @@ document.addEventListener('DOMContentLoaded', () => {
                     color.textContent = `Color:  ${colorString}`;
                     modalCard.classList.remove('modal-oculto');
                     modalCard.classList.add('modal-visible');
-                });
+                    
+                    // Configurar el botón de comprar para este producto específico
+                    botonComprarProducto.onclick = () => {   
+                        //Agregar el producto al carrito                   
+                        const productoActual = {
+                            id: producto.id,
+                            title: producto.title,
+                            price: producto.price,
+                            image: producto.image,
+                            talle: producto.talle,
+                            color: producto.color
+                        };
+                        carritoStorage.push(productoActual);
+                        localStorage.setItem('carrito', JSON.stringify(carritoStorage));                    
+                        
+                        const carritoItem = document.createElement('div');
+                        carritoItem.className = 'carrito-item';
+                        carritoItem.innerHTML = `
+                            <img src="${productoActual.image}" alt="${productoActual.title}">
+                            <h3>${productoActual.title}</h3>
+                            <p>Precio: $${productoActual.price}</p>
+                            <button class="boton-eliminar">Eliminar</button>
+                        `;
+                       
+                        carritoItem.querySelector('.boton-eliminar').addEventListener('click', () => {
+                            const index = carritoStorage.findIndex(item => item.id === productoActual.id);
+                            if (index !== -1) {
+                                carritoStorage.splice(index, 1);
+                                localStorage.setItem('carrito', JSON.stringify(carritoStorage));
+                                carritoItem.remove();
+                            }
+                        });
+                        document.querySelector('.carrito-items').appendChild(carritoItem);
 
+                        modalCard.classList.remove('modal-visible');
+                        modalCard.classList.add('modal-oculto');  
+                        toastContainer.classList.add('show'); 
+                        setTimeout(() => {
+                            toastContainer.classList.remove('show');
+                        }, 2000);
+                    };
+                });
                 card.appendChild(boton);
                 productosContainer.appendChild(card); 
-            });
-            // Agregar el event listener una sola vez fuera del forEach
-            botonComprarProducto.addEventListener('click', () => {   
-               // remover la clase en toast
-               modalCard.classList.remove('modal-visible');
-               modalCard.classList.add('modal-oculto');  
-               //muestro e toast                                                                  
-               toastContainer.classList.add('show'); 
-               // Espero  2 segundos y remuevo la clase para que no se vea                  
-               setTimeout(() => {
-                   toastContainer.classList.remove('show');
-               }, 2000);
             });
         }
 
@@ -160,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //cargamos productos ya convertidos a cards
         cargarProductos();      
         
-        //Agregamos una clase o la quita seguen el estado en que este menuItems
+        //Agregamos una clase o la quita segun el estado en que este menuItems
         hamburger.addEventListener('click', (event) => {
             event.preventDefault();
             menuItems.classList.toggle('active');

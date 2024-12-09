@@ -1045,11 +1045,15 @@ footer {
 }
 
 .carrito-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: var(--color-texto);
   background-color: var(--color-secundario);
   border-radius: 10px;
   padding: 20px;
-  width: 60%;
+  width: 60%;  
   font-family: roboto;
   box-shadow: var(--color-cuaternario) 20px 1px 50px;
 }
@@ -1065,6 +1069,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 80%;
 }
 
 .carrito-item {
