@@ -20,7 +20,7 @@
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#productos">Productos</a></li>
             <li><a href="#registro">Promociones</a></li>
-            <li id="carrito-total"><a href="#carrito"><i class="fas fa-shopping-cart"></i>2</a></li>
+            <li ><a href="#carrito" ><i class="fas fa-shopping-cart"></i><span id="carrito-total">0</span></a></li>
         </ul>
     </nav>
     <header class="hero scroll-margin" id="inicio">
@@ -200,7 +200,8 @@
                 <!-- Aquí se hacen las tarjetas de productos por JS-->              
             </div>
             <div class="carrito-total">
-                <p>Total: $90.00</p>
+                <p id="total-storage">Total: $00.00</p>
+                <button id="vaciar-carrito">Vaciar Carrito</button>
             </div>
         </div>
     </section>

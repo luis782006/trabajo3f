@@ -1131,6 +1131,25 @@ footer {
   text-align: right;
   font-size: 1.4rem;
   font-weight: bold;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+}
+.carrito-total button{
+  padding: 8px 16px;
+  background-color: var(--color-resaltado);
+  color: var(--color-texto);
+  border: 1px solid var(--color-resaltado);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.carrito-total button:hover {
+  color: var(--color-primario);
+  background-color: var(--color-texto);
+  box-shadow: var(--color-resaltado) 0px 5px 5px;    
 }
 
 /* Estilo para el ícono del carrito en el menú */

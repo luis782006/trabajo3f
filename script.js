@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const precios = document.getElementById('precios');
         const nroSocio = document.getElementById('nro-socio'); 
         const carritoStorage=[];
-        
+        const totalStorage=document.getElementById('total-storage'); 
+        const carritoItems = document.getElementById('carrito-total');
+        const vaciarCarrito = document.getElementById('vaciar-carrito');
 
         const url = "https://fakestoreapi.com/products"
 
@@ -134,6 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     modalCard.classList.remove('modal-oculto');
                     modalCard.classList.add('modal-visible');
                     
+                    //variables para manejar el carrito en los botones de agregar y eliminar items
+                    let carritoAuxiliar=[];
+                    let totalPrecioCarrito = 0;
                     // Configurar el botón de comprar para este producto específico
                     botonComprarProducto.onclick = () => {   
                         //Agregar el producto al carrito                   
@@ -148,6 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         carritoStorage.push(productoActual);
                         localStorage.setItem('carrito', JSON.stringify(carritoStorage));                    
                         debugger;
+                        
+                        ObtenerDatosLocalStorage(carritoAuxiliar, totalPrecioCarrito);
+                         
                         const carritoItem = document.createElement('div');
                         carritoItem.className = 'carrito-item';
                         carritoItem.innerHTML = `
@@ -162,9 +170,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (index !== -1) {
                                 carritoStorage.splice(index, 1);
                                 localStorage.setItem('carrito', JSON.stringify(carritoStorage));
+                                
                                 carritoItem.remove();
                             }
+                            //debugger;                            
+                            //debe actualizar la cantidad en el menu y el total en la lista                                                  
+                            ObtenerDatosLocalStorage(carritoAuxiliar, totalPrecioCarrito);
+                          
                         });
+                        
                         document.querySelector('.carrito-items').appendChild(carritoItem);
 
                         modalCard.classList.remove('modal-visible');
@@ -180,6 +194,34 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        function ObtenerDatosLocalStorage(carritoAuxiliar , totalPrecioCarrito) {   
+            carritoAuxiliar = localStorage.getItem('carrito');
+            //convertimos el string en array
+            carritoAuxiliar = JSON.parse(carritoAuxiliar);                       
+            debugger;
+            if (carritoAuxiliar.length!==0) {
+
+                for (let i = 0; i < carritoAuxiliar.length; i++) {
+                    //acumulo y redondeo                
+                    //debugger;
+                     totalPrecioCarrito += Math.round(carritoAuxiliar[i].price * 100) / 100; 
+                     totalStorage.textContent = `Total: $${totalPrecioCarrito}`;
+                     carritoItems.textContent = `${carritoAuxiliar.length}`;
+                }
+            }else{
+                totalStorage.textContent = `Total: $0`;
+                carritoItems.textContent = `${carritoAuxiliar.length}`;
+            }
+        }
+
+        // funcion para vaciar el carrito
+        vaciarCarrito.addEventListener('click', (event) => {
+            event.preventDefault();
+            localStorage.removeItem('carrito');
+            location.reload();
+        });
+
+
         //cargamos productos
         async function cargarProductos(){
             const productosRopa = await modificarProductos();
@@ -193,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             menuItems.classList.toggle('active');
         });
+        
 
         // Cerrar el menú al hacer clic en un elemento osea cada li
         document.querySelectorAll('.menu-items li').forEach(link => {
@@ -211,23 +254,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuItems.classList.remove('active');
             }
         });
-
+        
         botonAbout.addEventListener('click', () => {
             modal.classList.remove('modal-oculto');
             modal.classList.add('modal-visible');
             
         });
-
+        
         closebtn.addEventListener('click', () => {
             modal.classList.remove('modal-visible');
             modal.classList.add('modal-oculto');
         });
-
+        
         closebtnCard.addEventListener('click', () => {
             modalCard.classList.remove('modal-visible');
             modalCard.classList.add('modal-oculto');
         });
-
+        
         inputs.forEach(input => {
             input.addEventListener('mouseenter', () => {
                 input.style.border = "1px solid var(--color-resaltado)";
@@ -266,7 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.style.color = "var(--color-secundario)";
             });
         });
-        
         botonform.addEventListener('click', (event) => {
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
