@@ -39,7 +39,18 @@ Un sitio web de e-commerce moderno construido con HTML, CSS y JavaScript que per
 Este proyecto utiliza la [API de FakeStore](https://fakestoreapi.com/products) para obtener datos de productos de forma dinámica.
 
 ## Capturas de Pantalla  
-> Agrega aquí imágenes del proyecto para mostrar su funcionalidad.
+![image](https://github.com/user-attachments/assets/952d50aa-c7e7-4d86-903a-98bb95bb882d)
+![image](https://github.com/user-attachments/assets/fdce29ec-f8b3-4b45-86df-6fa0062023c7)
+![image](https://github.com/user-attachments/assets/89d7c6d8-5c20-4d8e-977f-6d27f1a54278)
+![image](https://github.com/user-attachments/assets/48bc53d9-fa16-4061-8754-5dae1277861c)
+![image](https://github.com/user-attachments/assets/56bf9a11-135e-45a2-ba75-6df532874455)
+![image](https://github.com/user-attachments/assets/6b89e9cc-94e8-4765-af6d-6fcb4b9971af)
+
+
+
+
+
+
 
 ## Autor  
 Desarrollado por Luis Felipe Sanchez.
